@@ -1,0 +1,23 @@
+{
+  "name": "visagate",
+  "private": true,
+  "version": "0.1.0",
+  "type": "module",
+  "workspaces": [
+    "client",
+    "packages/*"
+  ],
+  "engines": {
+    "node": ">=22"
+  },
+  "scripts": {
+    "dev": "npm run dev --workspace client",
+    "build": "npm run build --workspace client",
+    "lint": "npm run lint --workspace client && npm run check:i18n",
+    "check:i18n": "node scripts/check-i18n.mjs",
+    "check:bundle": "npm run build --workspace client && node scripts/check-bundle.mjs",
+    "check:a11y": "node scripts/check-a11y.mjs",
+    "test:domain": "node scripts/test-domain.mjs",
+    "preview": "npm run preview --workspace client"
+  }
+}

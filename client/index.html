@@ -1,0 +1,33 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="theme-color" content="#0f5c63" />
+
+    <!-- Only the two weights that paint the hero are preloaded; the rest load
+         with font-display: swap. -->
+    <link rel="preload" href="/fonts/inter-latin-400.woff2" as="font" type="font/woff2" crossorigin />
+    <link rel="preload" href="/fonts/inter-latin-700.woff2" as="font" type="font/woff2" crossorigin />
+
+    <!--
+      No static <title> or <meta name="description"> here on purpose.
+
+      React 19 hoists the tags rendered by <PageMeta> into <head>, but it does
+      not deduplicate — a static tag plus a hoisted one means two <title>s and
+      two descriptions, which is invalid HTML and leaves a crawler picking one
+      arbitrarily. That defeats the per-page titles and descriptions this
+      project needs (FR-PUB-03/04). <PageMeta> sets both as soon as the app
+      mounts, and both will be emitted at build time once the public routes are
+      pre-rendered.
+    -->
+  </head>
+  <body>
+    <div id="root"></div>
+    <noscript>
+      This portal needs JavaScript enabled to apply for a visa online.
+    </noscript>
+    <script type="module" src="/src/main.jsx"></script>
+  </body>
+</html>

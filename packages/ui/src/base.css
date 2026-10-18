@@ -1,0 +1,121 @@
+/*
+ * Base element styles shared by every VisaGate app (client + admin).
+ * Keep component styling in components; this file is only for element defaults,
+ * accessibility affordances and print output.
+ */
+
+@layer base {
+  html {
+    -webkit-text-size-adjust: 100%;
+    scroll-behavior: smooth;
+  }
+
+  body {
+    background-color: var(--vg-neutral-50);
+    color: var(--vg-neutral-900);
+    font-family: var(--vg-font-sans);
+    font-size: var(--text-body);
+    line-height: var(--vg-leading-body);
+    -webkit-font-smoothing: antialiased;
+  }
+
+  /* Arabic gets a touch more leading than Latin (§5.1). */
+  html[lang='ar'] body {
+    letter-spacing: normal;
+  }
+
+  h1,
+  h2,
+  h3,
+  h4 {
+    text-wrap: balance;
+  }
+
+  /* Latin-embedded identifiers (passport, reference, phone) must not reorder in RTL. */
+  .ltr-nums {
+    direction: ltr;
+    unicode-bidi: isolate;
+  }
+
+  /* Visible focus everywhere; WCAG 2.2 AA — 3:1 against adjacent colours.
+     `[tabindex="-1"]` targets (page headings we move focus to after a route
+     change) are excluded: that focus is programmatic, not a keyboard position,
+     and a ring there reads as "you are on a control". */
+  :where(a, button, input, select, textarea, summary, [tabindex]):not([tabindex='-1']):focus-visible {
+    outline: 2px solid var(--vg-info-600);
+    outline-offset: 2px;
+    border-radius: var(--vg-radius-input);
+  }
+
+  ::selection {
+    background-color: var(--vg-primary-100);
+    color: var(--vg-primary-700);
+  }
+}
+
+@layer utilities {
+  /* Respect the OS "reduce motion" setting: no transitions, no smooth scroll. */
+  @media (prefers-reduced-motion: reduce) {
+    *,
+    *::before,
+    *::after {
+      animation-duration: 0.01ms !important;
+      animation-iteration-count: 1 !important;
+      transition-duration: 0.01ms !important;
+      scroll-behavior: auto !important;
+    }
+  }
+
+  /* Visually hidden but announced by screen readers (WCAG 2.4.1). */
+  .sr-only-focusable:not(:focus):not(:focus-within) {
+    position: absolute;
+    width: 1px;
+    height: 1px;
+    padding: 0;
+    margin: -1px;
+    overflow: hidden;
+    clip-path: inset(50%);
+    white-space: nowrap;
+  }
+
+  /* Overrides Radix's `translate(-50%)` centering so the panel can stay inside
+     the viewport on small screens without JS measuring. */
+  .scrollbar-thin {
+    scrollbar-width: thin;
+  }
+
+  /* For horizontal strips (tab lists, chip rows) that scroll on small screens.
+     The strip stays keyboard-reachable, so a permanent scrollbar adds noise
+     without adding discoverability. */
+  .scrollbar-none {
+    scrollbar-width: none;
+  }
+
+  .scrollbar-none::-webkit-scrollbar {
+    display: none;
+  }
+}
+
+/* §10 — printable visa document, receipts and application summaries. */
+@media print {
+  body {
+    background-color: #ffffff;
+  }
+
+  .no-print {
+    display: none !important;
+  }
+
+  .print-only {
+    display: block !important;
+  }
+
+  a[href^='http']::after {
+    content: ' (' attr(href) ')';
+    font-size: 0.75rem;
+  }
+}
+
+.print-only {
+  display: none;
+}

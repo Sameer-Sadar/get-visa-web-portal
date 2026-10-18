@@ -1,0 +1,77 @@
+@import 'tailwindcss';
+
+@import '@visagate/ui/tokens.css';
+@import '@visagate/ui/base.css';
+
+/**
+ * Self-hosted, subset fonts (§19).
+ *
+ * Declared here rather than pulled from @fontsource's CSS because those files
+ * emit a `.woff` fallback alongside every `.woff2`, which doubled the shipped
+ * font payload (~420 KB → ~200 KB) for browsers that will never use it. These
+ * are stable, unhashed paths in `public/fonts`, which also lets index.html
+ * preload the two weights above the fold.
+ *
+ * Only the subsets the portal actually renders are shipped: Latin for Inter,
+ * Arabic for IBM Plex Sans Arabic. The browser picks per glyph, so mixed-script
+ * runs work without reordering (§11.5).
+ */
+
+@font-face {
+  font-family: 'Inter';
+  font-style: normal;
+  font-weight: 400;
+  font-display: swap;
+  src: url('/fonts/inter-latin-400.woff2') format('woff2');
+  unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+2000-206F, U+2074, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215;
+}
+
+@font-face {
+  font-family: 'Inter';
+  font-style: normal;
+  font-weight: 600;
+  font-display: swap;
+  src: url('/fonts/inter-latin-600.woff2') format('woff2');
+  unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+2000-206F, U+2074, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215;
+}
+
+@font-face {
+  font-family: 'Inter';
+  font-style: normal;
+  font-weight: 700;
+  font-display: swap;
+  src: url('/fonts/inter-latin-700.woff2') format('woff2');
+  unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+2000-206F, U+2074, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215;
+}
+
+@font-face {
+  font-family: 'IBM Plex Sans Arabic';
+  font-style: normal;
+  font-weight: 400;
+  font-display: swap;
+  src: url('/fonts/ibm-plex-sans-arabic-arabic-400.woff2') format('woff2');
+}
+
+@font-face {
+  font-family: 'IBM Plex Sans Arabic';
+  font-style: normal;
+  font-weight: 600;
+  font-display: swap;
+  src: url('/fonts/ibm-plex-sans-arabic-arabic-600.woff2') format('woff2');
+}
+
+@font-face {
+  font-family: 'IBM Plex Sans Arabic';
+  font-style: normal;
+  font-weight: 700;
+  font-display: swap;
+  src: url('/fonts/ibm-plex-sans-arabic-arabic-700.woff2') format('woff2');
+}
+
+@layer base {
+  /* Latin-first stack: the browser falls back per glyph, so one rule covers
+     mixed-script runs without reordering them (§11.5). */
+  html {
+    font-family: var(--vg-font-sans);
+  }
+}
