@@ -96,6 +96,11 @@
     "darkMode": "Dark mode",
     "lightMode": "Light mode"
   },
+  "theme": {
+    "label": "Color theme",
+    "light": "Light",
+    "dark": "Dark"
+  },
   "comingSoon": {
     "title": "This part isn't built yet",
     "description": "We're still working on this screen. Everything that is ready works from the home page.",
@@ -111,9 +116,23 @@
   "home": {
     "title": "Apply for your visa online — simple, secure, clear",
     "subtitle": "Find the right visa, check what you need, and follow your application at every step.",
-    "categoriesTitle": "Browse by visa type",
-    "categoriesSubtitle": "Every category in one place, with fees and processing times up front.",
-    "allVisas": "All visas",
+    "categoryAll": "All",
+    "findYourVisa": "Find the right visa",
+    "findYourVisaText": "Choose the visa category that matches your purpose of travel and start your application in a few simple steps.",
+    "packageKicker": "Package visa",
+    "packageTitle": "Get your visa faster through approved tourism packages",
+    "packageDescription": "Enjoy a smoother journey with a visit visa included in your travel package — from planning your trip to arriving and exploring.",
+    "packageCta": "Explore packages",
+    "statVisas": "Visas issued in 2023",
+    "statVisasValue": "18.6 million",
+    "statCountries": "Countries on visa digitization",
+    "statCountriesValue": "65",
+    "statSeconds": "Typical e-visa issuance",
+    "statSecondsValue": "60 seconds",
+    "knowMoreText": "Answers about applying, eligibility, payments and tracking.",
+    "categoriesTitle": "What brings you here?",
+    "categoriesSubtitle": "Select a visa type and start in a few simple steps.",
+    "allVisas": "Explore options",
     "popularTitle": "Most applied for",
     "popularSubtitle": "The visas most travellers use today.",
     "howItWorksTitle": "How it works",
@@ -126,11 +145,40 @@
     "trackStatValue2": "1.2M",
     "trackStat3": "Visa types available",
     "trackStatValue3": "9",
-    "faqTitle": "Common questions",
-    "faqCta": "See all questions",
+    "faqTitle": "Know more",
+    "faqCta": "See more",
     "supportTitle": "Still not sure?",
     "supportSubtitle": "Our support team answers within two business days.",
-    "supportCta": "Contact support"
+    "supportCta": "Contact support",
+    "hero": {
+      "label": "Featured visa journeys",
+      "getStarted": "Get started",
+      "learnMore": "Learn more",
+      "previous": "Previous slide",
+      "next": "Next slide",
+      "slides": {
+        "package": {
+          "title": "Package visa",
+          "subtitle": "Get your visa faster through approved tourism packages."
+        },
+        "culture": {
+          "title": "Discover cultural riches and beauty",
+          "subtitle": "Apply for a visit visa and discover the culture, heritage and landscapes."
+        },
+        "spiritual": {
+          "title": "Embark on a spiritual journey",
+          "subtitle": "Apply for a visit visa and travel for worship, reflection and family occasions."
+        },
+        "business": {
+          "title": "Expand your business horizons",
+          "subtitle": "Apply for a visit visa for business and explore a growing market."
+        },
+        "medical": {
+          "title": "Take care of your health",
+          "subtitle": "Apply for a visit visa and get the medical care you need."
+        }
+      }
+    }
   },
   "howItWorks": {
     "find": {

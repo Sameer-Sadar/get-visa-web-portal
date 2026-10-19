@@ -9,6 +9,17 @@ export default defineConfig({
     alias: {
       '@': fileURLToPath(new URL('./src', import.meta.url)),
     },
+    dedupe: ['react', 'react-dom'],
+  },
+  optimizeDeps: {
+    // Source workspace packages — let Vite transform their JSX instead of
+    // prebundling the raw files out of node_modules.
+    exclude: ['@visagate/ui', '@visagate/i18n'],
+  },
+  server: {
+    fs: {
+      allow: [fileURLToPath(new URL('..', import.meta.url))],
+    },
   },
   build: {
     /* Consumed by scripts/check-bundle.mjs, which enforces the §19 budget on

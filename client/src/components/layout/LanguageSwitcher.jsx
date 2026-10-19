@@ -43,13 +43,18 @@ export function LanguageSwitcher({ variant = 'inline', className }) {
               className={cx(
                 'inline-flex min-h-11 items-center rounded-input px-3 text-small font-semibold',
                 'transition-colors duration-200',
-                isCurrent
-                  ? 'bg-primary-100 text-primary-700'
-                  : 'text-neutral-700 hover:bg-neutral-50 hover:text-neutral-900',
+                variant === 'official'
+                  ? isCurrent
+                    ? 'text-primary-700 underline decoration-2 underline-offset-4'
+                    : 'text-neutral-700 hover:text-primary-700'
+                  : isCurrent
+                    ? 'bg-primary-100 text-primary-700'
+                    : 'text-neutral-700 hover:bg-neutral-50 hover:text-neutral-900',
                 variant === 'compact' && 'min-h-9 px-2.5',
+                variant === 'official' && 'min-h-9 px-2',
               )}
             >
-              {variant === 'compact' ? meta.shortLabel : meta.nativeLabel}
+              {variant === 'compact' || variant === 'official' ? meta.shortLabel : meta.nativeLabel}
             </Link>
           </li>
         )

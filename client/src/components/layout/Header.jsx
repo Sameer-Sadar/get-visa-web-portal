@@ -9,10 +9,11 @@ import { site, localePath } from '../../config/site.js'
 import { useCurrentUser } from '../../app/auth.js'
 import { LanguageSwitcher } from './LanguageSwitcher.jsx'
 import { Logo } from './Logo.jsx'
+import { ThemeSwitcher } from './ThemeSwitcher.jsx'
 
 const NAV_ITEM =
-  'text-neutral-700 hover:text-neutral-900 rounded-input px-3 py-2 text-body font-medium ' +
-  'transition-colors duration-200 aria-[current=page]:text-primary-700'
+  'text-neutral-700 hover:text-primary-700 rounded-input px-3 py-2 text-body font-medium ' +
+  'transition-colors duration-200 aria-[current=page]:text-primary-700 aria-[current=page]:font-semibold'
 
 export function Header() {
   const { t } = useTranslation()
@@ -21,8 +22,8 @@ export function Header() {
   const [drawerOpen, setDrawerOpen] = useState(false)
 
   return (
-    <header className="bg-surface border-neutral-300 sticky top-0 z-40 border-b no-print">
-      <div className="mx-auto flex h-16 max-w-75rem items-center gap-4 px-4 sm:px-6">
+    <header className="bg-surface sticky top-0 z-40 shadow-1 no-print">
+      <div className="mx-auto flex h-[4.5rem] max-w-75rem items-center gap-4 px-4 sm:px-6">
         <Link
           to={localePath(locale)}
           className="rounded-input"
@@ -31,7 +32,6 @@ export function Header() {
           <Logo />
         </Link>
 
-        {/* Desktop navigation (§3.3) */}
         <nav aria-label={t('header.primaryNavLabel')} className="hidden lg:flex lg:flex-1 lg:items-center">
           <ul className="flex items-center gap-1">
             {site.primaryNav.map((item) => (
@@ -44,9 +44,10 @@ export function Header() {
           </ul>
         </nav>
 
-        <div className="ms-auto flex items-center gap-2 lg:ms-0">
+        <div className="ms-auto flex items-center gap-3 lg:ms-0">
+          <ThemeSwitcher className="hidden lg:inline-flex" />
           <LanguageSwitcher
-            variant="compact"
+            variant="official"
             className="hidden lg:flex lg:items-center"
           />
 
@@ -54,8 +55,8 @@ export function Header() {
             {user ? <AccountMenu locale={locale} /> : <AuthActions locale={locale} />}
           </div>
 
-          {/* Mobile header: logo · language toggle · menu (drawer) */}
-          <LanguageSwitcher variant="compact" className="lg:hidden" />
+          <ThemeSwitcher variant="icon" className="lg:hidden" />
+          <LanguageSwitcher variant="official" className="lg:hidden" />
 
           <Button
             variant="ghost"
@@ -69,6 +70,7 @@ export function Header() {
           </Button>
         </div>
       </div>
+      <div className="h-0.5 w-full bg-linear-to-r from-primary-700 via-accent-500 to-primary-700" />
 
       <Drawer open={drawerOpen} onOpenChange={setDrawerOpen} title={t('common.menu')}>
         <nav aria-label={t('header.drawerNavLabel')}>
@@ -90,6 +92,11 @@ export function Header() {
             ))}
           </ul>
         </nav>
+
+        <div className="border-neutral-300 mt-6 border-t pt-6">
+          <p className="text-neutral-700 mb-3 text-small font-semibold">{t('theme.label')}</p>
+          <ThemeSwitcher />
+        </div>
 
         <div className="border-neutral-300 mt-6 border-t pt-6">
           {user ? (
@@ -128,10 +135,6 @@ export function Header() {
             </div>
           )}
         </div>
-
-        <p className="text-neutral-700 mt-6 text-small">
-          {t('brand.independentService')}
-        </p>
       </Drawer>
     </header>
   )

@@ -3,21 +3,17 @@ import { useSyncExternalStore } from 'react'
 import { useTranslation } from 'react-i18next'
 import { Link, useParams } from 'react-router-dom'
 import { Container } from '@visagate/ui/Container'
-import { Divider } from '@visagate/ui/Container'
 import { initTheme } from '../../app/theme.js'
 import { site, localePath } from '../../config/site.js'
 import { LanguageSwitcher } from './LanguageSwitcher.jsx'
 import { Logo } from './Logo.jsx'
 
 const LINK =
-  'text-neutral-700 hover:text-primary-700 inline-flex min-h-11 items-center text-small ' +
+  'text-white/80 hover:text-white inline-flex min-h-11 items-center text-small ' +
   'transition-colors duration-200 hover:underline'
 
-const HEADING = 'text-neutral-900 text-small font-semibold'
+const HEADING = 'text-white text-small font-semibold'
 
-/* `useSyncExternalStore` bindings for the shared theme controller. The
-   third argument is the server/SSR snapshot; this app is client-only, so it
-   never runs but keeps the hook contract satisfied. */
 const subscribeToTheme = (onStoreChange) => initTheme().subscribe(onStoreChange)
 const getResolvedTheme = () => initTheme().resolved()
 const getLightTheme = () => 'light'
@@ -26,30 +22,25 @@ export function Footer() {
   const { t } = useTranslation()
   const { locale } = useParams()
 
-  /* Subscribes to the shared controller rather than holding its own copy, so
-     the control stays correct when the preference is `system` and the OS flips
-     while the page is open. */
   const theme = useSyncExternalStore(subscribeToTheme, getResolvedTheme, getLightTheme)
   const isDark = theme === 'dark'
 
   return (
-    <footer className="bg-surface border-neutral-300 mt-auto border-t no-print">
+    <footer className="bg-footer mt-auto text-white no-print">
       <Container className="py-12">
         <div className="grid gap-10 sm:grid-cols-2 lg:grid-cols-4">
           <div>
-            <Logo />
-            <p className="text-neutral-700 mt-3 max-w-xs text-small">
+            <Logo invert />
+            <p className="mt-3 max-w-xs text-small text-white/80">
               {t('brand.tagline')}
             </p>
-            <LanguageSwitcher className="mt-4" />
+            <LanguageSwitcher variant="official" className="mt-4 [&_a]:text-white/80 [&_a[aria-current=true]]:text-white" />
 
-            {/* Discreet and in the footer rather than the header: theme is a
-                personal preference, not a primary navigation item (§3.3). */}
             <button
               type="button"
               onClick={() => initTheme().toggle()}
               aria-pressed={isDark}
-              className="text-neutral-700 hover:bg-neutral-50 mt-2 inline-flex min-h-11 items-center gap-2 rounded-input px-3 text-small transition-colors"
+              className="mt-2 inline-flex min-h-11 items-center gap-2 rounded-input px-3 text-small text-white/80 transition-colors hover:bg-white/10 hover:text-white"
             >
               {isDark ? (
                 <Sun aria-hidden="true" className="size-4" />
@@ -93,18 +84,14 @@ export function Footer() {
           ))}
         </div>
 
-        {/* Operator identity is a legal requirement, not decoration: PRD §12
-            requires it on every page, together with a clear statement that the
-            service is independent and does not issue visas on behalf of an
-            authority. */}
         <section aria-labelledby="footer-operator-heading" className="mt-10">
-          <Divider />
+          <div className="h-px w-full bg-white/20" />
           <div className="mt-8 grid gap-6 sm:grid-cols-3">
             <div>
               <h2 id="footer-operator-heading" className={HEADING}>
                 {t('footer.operatorIdentity')}
               </h2>
-              <address className="text-neutral-700 mt-2 text-small not-italic">
+              <address className="mt-2 text-small text-white/80 not-italic">
                 {site.operator.legalName}
                 <br />
                 {site.operator.registrationNumber}
@@ -131,16 +118,16 @@ export function Footer() {
 
             <div>
               <h3 className={HEADING}>{t('footer.independentService')}</h3>
-              <p className="text-neutral-700 mt-2 text-small">
+              <p className="mt-2 text-small text-white/80">
                 {t(site.operator.independentServiceStatementKey)}
               </p>
             </div>
           </div>
         </section>
 
-        <Divider className="mt-8" />
+        <div className="mt-8 h-px w-full bg-white/20" />
 
-        <p className="text-neutral-700 mt-6 text-small">
+        <p className="mt-6 text-small text-white/70">
           © <span className="ltr-nums">{new Date().getFullYear()}</span>{' '}
           {site.operator.legalName}. {t('footer.rights')}
         </p>

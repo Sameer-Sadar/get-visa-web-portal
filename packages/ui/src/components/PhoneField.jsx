@@ -73,7 +73,12 @@ export const PhoneField = forwardRef(function PhoneField(
       >
         {label}
         {required ? (
-          <span className="text-danger-600"> ({t('requiredMarker')})</span>
+          <>
+            <span className="text-danger-600 ms-0.5" aria-hidden="true">
+              *
+            </span>
+            <span className="sr-only"> {t('requiredMarker')}</span>
+          </>
         ) : optional ? (
           <span className="text-neutral-700 font-normal"> ({t('optionalMarker')})</span>
         ) : null}

@@ -62,14 +62,14 @@ export function Field({
           )}
         >
           {label}
-          {/* §8: required/optional are spelled out, not just an asterisk.
-              The markers come from the `ui` catalog so an Arabic form does not
-              read "(required)" in English (§11.7). */}
           {required ? (
-            <span className="text-danger-600"> ({t('requiredMarker')})</span>
+            <span className="text-danger-600 ms-0.5" aria-hidden="true">
+              *
+            </span>
           ) : optional ? (
             <span className="text-neutral-700 font-normal"> ({t('optionalMarker')})</span>
           ) : null}
+          {required ? <span className="sr-only"> {t('requiredMarker')}</span> : null}
         </label>
       ) : null}
 

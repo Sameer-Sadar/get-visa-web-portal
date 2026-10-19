@@ -3,38 +3,37 @@ import { useTranslation } from 'react-i18next'
 import { site } from '../../config/site.js'
 
 /**
- * Original brand mark. Deliberately not a state emblem, seal or coat of arms —
- * PRD §1 requires an independent visual identity that cannot be mistaken for
- * a government authority.
- *
- * `wordmark` is off for icon-only placements (the mobile drawer, favicons).
+ * Wordmark for the portal. The mark is a leaf/crescent monogram in the
+ * official digital-green palette — not a state emblem or coat of arms.
  */
-export function Logo({ className, showWordmark = true }) {
+export function Logo({ className, showWordmark = true, invert = false }) {
   const { t } = useTranslation()
 
   return (
-    <span className={cx('inline-flex items-center gap-2', className)}>
+    <span className={cx('inline-flex items-center gap-2.5', className)}>
       <svg
-        viewBox="0 0 32 32"
+        viewBox="0 0 40 40"
         role="img"
         aria-label={showWordmark ? undefined : t('brand.name')}
         aria-hidden={showWordmark ? 'true' : undefined}
         focusable="false"
-        className="size-8 shrink-0"
+        className="size-10 shrink-0"
       >
-        {/* An abstract gate: two uprights and a lintel, open at the base. */}
-        <rect width="32" height="32" rx="8" fill="var(--vg-primary-700)" />
+        <circle cx="20" cy="20" r="20" fill={invert ? '#ffffff' : 'var(--vg-primary-700)'} />
         <path
-          d="M10 11v11M22 11v11M10 16h12"
-          stroke="var(--vg-surface)"
-          strokeWidth="2.5"
-          strokeLinecap="round"
-          fill="none"
+          d="M12.5 24.5c4.2-1.2 7.2-4.8 8.1-9.4.8 4.6 3.8 8.2 8 9.4-3.8 2.8-8.7 3.4-12.7 1.6-1.3-.6-2.4-1.4-3.4-2.4Z"
+          fill={invert ? 'var(--vg-primary-700)' : '#ffffff'}
         />
+        <circle cx="20" cy="13.2" r="2.1" fill="var(--vg-accent-500)" />
       </svg>
 
       {showWordmark ? (
-        <span className="text-h3 text-neutral-900 font-bold tracking-tight">
+        <span
+          className={cx(
+            'text-[1.25rem] leading-none font-semibold tracking-tight',
+            invert ? 'text-white' : 'text-neutral-900',
+          )}
+        >
           {site.brand.name}
         </span>
       ) : null}

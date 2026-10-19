@@ -5,7 +5,7 @@ import { Spinner } from './Spinner.jsx'
 
 const VARIANTS = {
   primary:
-    'bg-primary-700 text-white hover:bg-primary-600 active:bg-primary-700 disabled:hover:bg-primary-700',
+    'bg-primary-700 !text-white hover:bg-primary-600 hover:!text-white active:bg-primary-800 disabled:hover:bg-primary-700 [&_svg]:text-white',
   secondary:
     'border border-neutral-300 bg-surface text-primary-700 hover:border-primary-700 hover:bg-primary-100',
   tertiary:

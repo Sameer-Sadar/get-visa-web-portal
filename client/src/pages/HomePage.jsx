@@ -5,34 +5,26 @@ import { Link, useParams } from 'react-router-dom'
 import { Button } from '@visagate/ui/Button'
 import { Card } from '@visagate/ui/Card'
 import { Container, Section } from '@visagate/ui/Container'
+import { cx } from '@visagate/ui/lib/cx.js'
 import { localePath } from '../config/site.js'
 import { PageMeta } from '../app/PageMeta.jsx'
 import { faqStructuredData } from '../lib/structuredData.js'
-import { AnnouncementBanner } from '../components/domain/AnnouncementBanner.jsx'
 import { CategoryIcon } from '../components/domain/CategoryIcon.jsx'
 import { FinderForm } from '../components/domain/FinderForm.jsx'
+import { HeroCarousel } from '../components/domain/HeroCarousel.jsx'
 import { HowItWorks } from '../components/domain/HowItWorks.jsx'
 import { VisaCard } from '../components/domain/VisaCard.jsx'
-import { getActiveAnnouncements, getFaqs } from '../services/contentService.js'
+import { getFaqs } from '../services/contentService.js'
 import { getCategories, getVisaTypes } from '../services/catalogService.js'
 import { localize } from '../lib/format.js'
 
-/**
- * Home page (FR-PUB-01, §6.1).
- *
- * Order follows the spec: the finder sits above the fold because it is the
- * primary action. Everything else supports someone who is not ready to search
- * yet.
- */
+const PILL =
+  'inline-flex min-h-11 items-center rounded-pill border border-neutral-300 bg-surface px-4 text-small font-semibold text-neutral-700 transition-colors hover:border-primary-700 hover:text-primary-700'
+
 export default function HomePage() {
   const { t, i18n } = useTranslation()
   const { locale } = useParams()
   const language = i18n.resolvedLanguage
-
-  const { data: announcements = [] } = useQuery({
-    queryKey: ['announcements'],
-    queryFn: getActiveAnnouncements,
-  })
 
   const { data: visaTypes = [] } = useQuery({
     queryKey: ['visa-types'],
@@ -53,7 +45,6 @@ export default function HomePage() {
 
   return (
     <>
-      {/* Home renders its own hero heading, so it publishes its own head. */}
       <PageMeta
         title={t('meta.homeTitle')}
         description={t('meta.homeDescription')}
@@ -62,29 +53,84 @@ export default function HomePage() {
         structuredData={faqStructuredData(faqs.slice(0, 6), language)}
       />
 
-      {/* Policy and maintenance notices must not be missed. */}
-      <div className="bg-surface border-neutral-300 border-b">
-        <AnnouncementBanner announcements={announcements} />
+      <HeroCarousel />
+
+      <div className="relative z-10 -mt-10 px-4 sm:-mt-12 sm:px-6">
+        <div className="bg-surface mx-auto flex max-w-75rem flex-wrap items-center justify-center gap-2 rounded-card px-4 py-4 shadow-3 sm:justify-between sm:px-6">
+          <Link to={localePath(locale, '/visas')} className={cx(PILL, 'border-primary-700 bg-primary-100 text-primary-700')}>
+            {t('home.categoryAll')}
+          </Link>
+          <ul className="flex flex-wrap items-center justify-center gap-2">
+            {categories.slice(0, 5).map((category) => (
+              <li key={category.code}>
+                <Link
+                  to={localePath(locale, `/visas/category/${category.key}`)}
+                  className={PILL}
+                >
+                  {localize(category.name, language)}
+                </Link>
+              </li>
+            ))}
+          </ul>
+        </div>
       </div>
 
-      {/* ── Hero + finder ─────────────────────────────────────────── */}
-      <section className="bg-surface border-neutral-300 border-b">
-        <Container className="py-12 sm:py-16">
+      <Section>
+        <Container>
           <div className="max-w-3xl">
-            <h1 className="text-display font-bold">{t('home.title')}</h1>
-            <p className="text-neutral-700 mt-4 text-lg">{t('home.subtitle')}</p>
+            <h2 className="text-h2 font-semibold">{t('home.findYourVisa')}</h2>
+            <p className="text-neutral-700 mt-2">{t('home.findYourVisaText')}</p>
           </div>
-
-          {/* Finder above the fold (§6.1) */}
-          <Card className="mt-8 p-6 shadow-2">
-            <h2 className="text-h3 text-neutral-900 font-semibold">{t('finder.heading')}</h2>
+          <Card className="mt-8 p-6 shadow-2 sm:p-8">
+            <h3 className="text-h3 text-neutral-900 font-semibold">{t('finder.heading')}</h3>
             <p className="text-neutral-700 mt-1 mb-5">{t('finder.intro')}</p>
             <FinderForm />
           </Card>
         </Container>
-      </section>
+      </Section>
 
-      {/* ── Categories ────────────────────────────────────────────── */}
+      <Section className="pt-0">
+        <Container>
+          <div className="overflow-hidden rounded-card bg-linear-to-r from-primary-800 to-primary-700 text-white shadow-2">
+            <div className="grid gap-6 p-6 sm:p-10 lg:grid-cols-[1.4fr_1fr] lg:items-center">
+              <div>
+                <p className="text-accent-500 text-small font-semibold tracking-[0.16em] uppercase">
+                  {t('home.packageKicker')}
+                </p>
+                <h2 className="text-h2 mt-2 font-semibold text-white">{t('home.packageTitle')}</h2>
+                <p className="mt-3 max-w-2xl text-white/90">{t('home.packageDescription')}</p>
+                <div className="mt-6 flex flex-wrap gap-3">
+                  <Link
+                    to={localePath(locale, '/visas/category/visit')}
+                    className="inline-flex min-h-11 items-center justify-center rounded-input bg-[#14573a] px-4 text-button font-semibold text-white hover:bg-[#0f3d2c]"
+                  >
+                    {t('home.packageCta')}
+                  </Link>
+                  <Link
+                    to={localePath(locale, '/visas')}
+                    className="inline-flex min-h-11 items-center justify-center rounded-input border border-white/70 px-4 text-button font-semibold text-white hover:bg-white/10"
+                  >
+                    {t('home.hero.learnMore')}
+                  </Link>
+                </div>
+              </div>
+              <dl className="grid gap-4 sm:grid-cols-3 lg:grid-cols-1">
+                {[
+                  { label: t('home.statVisas'), value: t('home.statVisasValue') },
+                  { label: t('home.statCountries'), value: t('home.statCountriesValue') },
+                  { label: t('home.statSeconds'), value: t('home.statSecondsValue') },
+                ].map((stat) => (
+                  <div key={stat.label} className="rounded-card bg-white/10 px-4 py-3">
+                    <dd className="text-h2 font-bold text-white">{stat.value}</dd>
+                    <dt className="text-small text-white/80">{stat.label}</dt>
+                  </div>
+                ))}
+              </dl>
+            </div>
+          </div>
+        </Container>
+      </Section>
+
       <Section className="bg-neutral-50">
         <Container>
           <div className="flex flex-wrap items-end justify-between gap-4">
@@ -127,7 +173,6 @@ export default function HomePage() {
         </Container>
       </Section>
 
-      {/* ── Popular visas ──────────────────────────────────────────── */}
       <Section>
         <Container>
           <h2 className="text-h2 font-semibold">{t('home.popularTitle')}</h2>
@@ -141,18 +186,16 @@ export default function HomePage() {
         </Container>
       </Section>
 
-      {/* ── How it works ──────────────────────────────────────────── */}
-      <Section className="bg-surface border-neutral-300 border-y">
+      <Section className="bg-neutral-50">
         <Container>
           <h2 className="text-h2 font-semibold">{t('home.howItWorksTitle')}</h2>
           <HowItWorks className="mt-8" />
         </Container>
       </Section>
 
-      {/* ── Track ─────────────────────────────────────────────────── */}
       <Section>
         <Container>
-          <div className="bg-primary-100 rounded-card p-6 sm:p-10">
+          <div className="rounded-card bg-primary-100 p-6 sm:p-10">
             <div className="grid gap-6 lg:grid-cols-2 lg:items-center">
               <div>
                 <h2 className="text-h2 font-semibold">{t('home.trackTitle')}</h2>
@@ -165,7 +208,7 @@ export default function HomePage() {
                 </Button>
               </div>
 
-              <dl className="bg-surface rounded-card border-neutral-300 grid gap-4 border p-5 sm:grid-cols-3 lg:grid-cols-1 xl:grid-cols-3">
+              <dl className="bg-surface rounded-card border-neutral-300 grid gap-4 border p-5 sm:grid-cols-3">
                 {[
                   { label: t('home.trackStat1'), value: t('home.trackStatValue1') },
                   { label: t('home.trackStat2'), value: t('home.trackStatValue2') },
@@ -182,11 +225,13 @@ export default function HomePage() {
         </Container>
       </Section>
 
-      {/* ── FAQ teaser + support ──────────────────────────────────── */}
       <Section className="bg-surface border-neutral-300 border-t">
         <Container>
           <div className="flex flex-wrap items-end justify-between gap-4">
-            <h2 className="text-h2 font-semibold">{t('home.faqTitle')}</h2>
+            <div>
+              <h2 className="text-h2 font-semibold">{t('home.faqTitle')}</h2>
+              <p className="text-neutral-700 mt-1">{t('home.knowMoreText')}</p>
+            </div>
             <Button variant="tertiary" asChild>
               <Link to={localePath(locale, '/help')}>
                 {t('home.faqCta')}

@@ -13,6 +13,7 @@
     "src"
   ],
   "dependencies": {
+    "@visagate/ui": "*",
     "i18next": "^25.10.10",
     "i18next-icu": "^2.6.1",
     "react-i18next": "^16.6.6"

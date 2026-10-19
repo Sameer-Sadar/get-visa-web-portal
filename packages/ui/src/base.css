@@ -11,7 +11,7 @@
   }
 
   body {
-    background-color: var(--vg-neutral-50);
+    background-color: var(--vg-surface);
     color: var(--vg-neutral-900);
     font-family: var(--vg-font-sans);
     font-size: var(--text-body);

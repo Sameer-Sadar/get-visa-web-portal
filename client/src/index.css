@@ -73,5 +73,6 @@
      mixed-script runs without reordering them (§11.5). */
   html {
     font-family: var(--vg-font-sans);
+    word-spacing: normal;
   }
 }

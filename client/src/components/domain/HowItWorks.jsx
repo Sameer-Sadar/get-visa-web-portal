@@ -22,16 +22,15 @@ export function HowItWorks({ className }) {
         <li key={key} className="flex flex-col gap-3">
           <span
             aria-hidden="true"
-            className="bg-primary-100 text-primary-700 grid size-11 place-items-center rounded-pill"
+            className="bg-primary-700 text-white grid size-12 place-items-center rounded-pill shadow-1"
           >
             <Icon className="size-5" />
           </span>
 
           <div>
-            <p className="text-neutral-700 text-small">
+            <p className="text-primary-700 text-small font-semibold">
               <span className="ltr-nums">
-                {index + 1}
-                <span aria-hidden="true">/4</span>
+                {String(index + 1).padStart(2, '0')}
               </span>
             </p>
             <h3 className="text-neutral-900 text-h3 font-semibold">{t(`howItWorks.${key}.title`)}</h3>

@@ -20,38 +20,40 @@
 :root {
   color-scheme: light;
 
-  /* Brand — teal */
-  --vg-primary-700: #0f5c63;
-  --vg-primary-600: #13717a;
-  --vg-primary-100: #e1f2f3;
+  /* Brand — Saudi digital green (DGA / ksavisa.sa) */
+  --vg-primary-800: #166a45;
+  --vg-primary-700: #1b8354;
+  --vg-primary-600: #25935f;
+  --vg-primary-100: #dff6e7;
 
-  /* Accent — gold, used sparingly */
-  --vg-accent-500: #b8893b;
+  /* Accent — official gold */
+  --vg-accent-500: #dba102;
 
   /* Neutrals */
-  --vg-neutral-900: #14212b;
-  --vg-neutral-700: #3b4a57;
-  --vg-neutral-300: #cbd3da;
-  --vg-neutral-50: #f6f8fa;
+  --vg-neutral-900: #0d121c;
+  --vg-neutral-700: #4d5761;
+  --vg-neutral-300: #d2d6db;
+  --vg-neutral-50: #f9fafb;
   --vg-surface: #ffffff;
+  --vg-footer: #104631;
 
   /* Status */
-  --vg-success-600: #1e7a46;
-  --vg-warning-600: #a15c00;
-  --vg-danger-600: #b3261e;
-  --vg-info-600: #1d5fa8;
+  --vg-success-600: #079455;
+  --vg-warning-600: #dc6803;
+  --vg-danger-600: #d92d20;
+  --vg-info-600: #1570ef;
 
   /* Non-colour tokens */
-  --vg-font-sans: 'Inter', 'IBM Plex Sans Arabic', ui-sans-serif, system-ui,
+  --vg-font-sans: 'IBM Plex Sans Arabic', 'Inter', ui-sans-serif, system-ui,
     'Segoe UI', sans-serif;
 
-  --vg-radius-input: 0.375rem;
-  --vg-radius-card: 0.75rem;
+  --vg-radius-input: 0.5rem;
+  --vg-radius-card: 1rem;
   --vg-radius-pill: 9999px;
 
-  --vg-shadow-1: 0 1px 2px rgb(20 33 43 / 0.06);
-  --vg-shadow-2: 0 4px 12px rgb(20 33 43 / 0.08);
-  --vg-shadow-3: 0 12px 32px rgb(20 33 43 / 0.12);
+  --vg-shadow-1: 0 1px 3px rgb(16 24 40 / 0.1), 0 1px 2px rgb(16 24 40 / 0.06);
+  --vg-shadow-2: 0 4px 8px -2px rgb(16 24 40 / 0.1), 0 2px 4px -2px rgb(16 24 40 / 0.06);
+  --vg-shadow-3: 0 12px 16px -6px rgb(16 24 40 / 0.08), 0 4px 6px -2px rgb(16 24 40 / 0.03);
 
   --vg-leading-body: 1.625rem;
   --vg-content-width: 75rem;
@@ -60,22 +62,24 @@
 .dark {
   color-scheme: dark;
 
-  --vg-primary-700: #4fb3bc;
-  --vg-primary-600: #6bc5cd;
-  --vg-primary-100: #12363a;
+  --vg-primary-800: #88d8ad;
+  --vg-primary-700: #54c08a;
+  --vg-primary-600: #88d8ad;
+  --vg-primary-100: #104631;
 
-  --vg-accent-500: #d9a95a;
+  --vg-accent-500: #f5bd02;
 
-  --vg-neutral-900: #f2f5f7;
-  --vg-neutral-700: #c9d2d9;
-  --vg-neutral-300: #3a4752;
-  --vg-neutral-50: #0e161c;
-  --vg-surface: #16212a;
+  --vg-neutral-900: #f3f4f6;
+  --vg-neutral-700: #d2d6db;
+  --vg-neutral-300: #384250;
+  --vg-neutral-50: #0d121c;
+  --vg-surface: #111927;
+  --vg-footer: #092a1e;
 
-  --vg-success-600: #52c07f;
-  --vg-warning-600: #f0b24a;
-  --vg-danger-600: #f2837d;
-  --vg-info-600: #6aa8ec;
+  --vg-success-600: #17b26a;
+  --vg-warning-600: #f79009;
+  --vg-danger-600: #f04438;
+  --vg-info-600: #2e90fa;
 
   --vg-shadow-1: 0 1px 2px rgb(0 0 0 / 0.4);
   --vg-shadow-2: 0 4px 12px rgb(0 0 0 / 0.45);
@@ -86,6 +90,7 @@
 }
 
 @theme inline {
+  --color-primary-800: var(--vg-primary-800);
   --color-primary-700: var(--vg-primary-700);
   --color-primary-600: var(--vg-primary-600);
   --color-primary-100: var(--vg-primary-100);
@@ -95,6 +100,7 @@
   --color-neutral-300: var(--vg-neutral-300);
   --color-neutral-50: var(--vg-neutral-50);
   --color-surface: var(--vg-surface);
+  --color-footer: var(--vg-footer);
   --color-success-600: var(--vg-success-600);
   --color-warning-600: var(--vg-warning-600);
   --color-danger-600: var(--vg-danger-600);
