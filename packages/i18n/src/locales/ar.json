@@ -19,7 +19,10 @@
   },
   "header": {
     "primaryNavLabel": "القائمة الرئيسية",
-    "drawerNavLabel": "قائمة التنقل"
+    "drawerNavLabel": "قائمة التنقل",
+    "visaTypes": "أنواع التأشيرات",
+    "information": "معلومات",
+    "browseAllVisas": "تصفح كل التأشيرات"
   },
   "nav": {
     "visas": "التأشيرات",

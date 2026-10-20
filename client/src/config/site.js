@@ -36,14 +36,23 @@ export const site = {
     { key: 'help', path: '/help' },
   ],
 
-  /** Visa categories from PRD Appendix B, grouped for the footer (§6.3). */
+  /** Visa categories from PRD Appendix B, grouped for the footer and Find a visa menu. */
   visaCategories: [
-    { key: 'visit', path: '/visas/visit' },
-    { key: 'transit', path: '/visas/transit' },
-    { key: 'work', path: '/visas/work' },
-    { key: 'residence', path: '/visas/residence' },
-    { key: 'study', path: '/visas/study' },
-    { key: 'special', path: '/visas/special' },
+    { key: 'visit', path: '/visas/category/visit', icon: 'Plane' },
+    { key: 'transit', path: '/visas/category/transit', icon: 'Route' },
+    { key: 'work', path: '/visas/category/work', icon: 'Briefcase' },
+    { key: 'residence', path: '/visas/category/residence', icon: 'Home' },
+    { key: 'study', path: '/visas/category/study', icon: 'GraduationCap' },
+    { key: 'special', path: '/visas/category/special', icon: 'ShieldCheck' },
+    { key: 'services', path: '/visas/category/services', icon: 'RefreshCw' },
+  ],
+
+  /** Second column in the Find a visa hover menu. */
+  findAVisaInfoLinks: [
+    { key: 'browseAll', path: '/visas', labelKey: 'header.browseAllVisas' },
+    { key: 'finder', path: '/find-a-visa', labelKey: 'nav.findAVisa' },
+    { key: 'help', path: '/help', labelKey: 'nav.help' },
+    { key: 'contact', path: '/help/contact', labelKey: 'footer.contact' },
   ],
 
   footerNav: [

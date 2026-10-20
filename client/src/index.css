@@ -76,3 +76,14 @@
     word-spacing: normal;
   }
 }
+
+/* Find a visa mega menu — hover and keyboard focus, no JS required. */
+.nav-find-visa:hover .nav-find-visa-menu,
+.nav-find-visa:focus-within .nav-find-visa-menu {
+  visibility: visible;
+}
+
+.nav-find-visa:hover .nav-find-visa-chevron,
+.nav-find-visa:focus-within .nav-find-visa-chevron {
+  transform: rotate(180deg);
+}

@@ -19,7 +19,10 @@
   },
   "header": {
     "primaryNavLabel": "Main navigation",
-    "drawerNavLabel": "Menu navigation"
+    "drawerNavLabel": "Menu navigation",
+    "visaTypes": "Visa types",
+    "information": "Information",
+    "browseAllVisas": "Browse all visas"
   },
   "nav": {
     "visas": "Visas",
